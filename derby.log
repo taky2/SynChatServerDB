@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue Nov 24 19:56:13 MST 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.3 - (1557168): instance a816c00e-0151-3c91-e525-00000d802b90 
+Tue Nov 24 20:18:09 MST 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.3 - (1557168): instance a816c00e-0151-3ca5-f997-00000d807470 
 on database directory /Users/kyma/IdeaProjects/SynChatServerDB/ChatlogDB with class loader sun.misc.Launcher$AppClassLoader@452b3a41 
 Loaded from file:/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/db/lib/derby.jar
 java.vendor=Oracle Corporation

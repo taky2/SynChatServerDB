@@ -26,6 +26,8 @@ public class Server {
      *   > java Server [portNumber]
      *
      *  If no port number specified default (8700) is used
+     *
+     *  TODO: Update client and server apps to support CLI (console-mode)
      **/
     public static void main(String[] args) {
 
@@ -325,27 +327,6 @@ public class Server {
                             sendMsg((i + 1) + ") <" + clientThread.username + ">: connected since " + clientThread.date);
                         }
                         sendMsg("------------------------------------------------------------------------\n");
-                        /**
-                        try
-                        {
-                            // Create a named constant for the URL.
-                            // NOTE: This value is specific for Java DB.
-                            final String DB_URL = "jdbc:derby:ChatlogDB;create=true";
-
-                            // Create a connection to the database.
-                            Connection DbConnection = DriverManager.getConnection(DB_URL);
-
-                            // Reference Tables and print
-                            viewUserTable(DbConnection);
-
-                            // Close the connection.
-                            DbConnection.close();
-                        } catch (Exception e)
-                        {
-                            System.out.println("Error Creating the Chatlog Table");
-                            System.out.println(e.getMessage());
-                        }
-                        **/
                         break;
                     case ChatMessage.HISTORY:
                         // RETRIEVE INFO FROM DB HERE TO SHOW HISTORY
@@ -457,17 +438,6 @@ public class Server {
         try
         {
             Statement stmt = conn.createStatement();    // Get a Statement object.
-            /**
-            try
-            {
-                stmt.execute("DROP TABLE Userlist");    // Drop the Userlist table.
-                System.out.println("Customer table dropped.");
-            } catch (SQLException ex)
-            {
-                // No need to report an error.
-                // The table simply did not exist.
-            }
-             **/
             try
             {
 
@@ -537,92 +507,14 @@ public class Server {
         }
     }
 
-/**
- * * * * DECIDED THIS WAS UNNECESSARY TO IMPLEMENT * * * *
- *
-     // buildUserlistTable method creates the Userlist table and adds some rows to it.
-    public void buildUserlistTable(Connection DbConnection)
-    {
-        try
-        {
-            Statement statement = DbConnection.createStatement();    // Get a Statement object.
-            // Create the table.
-            statement.execute("CREATE TABLE Userlist" +
-                    "( Username CHAR(10) )");
-
-            // Add some rows to the new table.
-            statement.executeUpdate("INSERT INTO Userlist VALUES" +
-                    "('User1295')");
-
-            statement.executeUpdate("INSERT INTO Userlist VALUES" +
-                    "('User1043')");
-
-            statement.executeUpdate("INSERT INTO Userlist VALUES" +
-                    "('User9842')");
-
-            System.out.println("Userlist table created.");
-        } catch (SQLException ex)
-        {
-            System.out.println("ERROR: " + ex.getMessage());
-        }
-    }
- **/
-
-    /**
-     * The buildUnpaidOrderTable method creates
-     * the UnpaidOrder table.
-     */
-
-/**
- * * * * DECIDED THIS WAS UNNECESSARY TO IMPLEMENT * * * *
- *
-    public void viewUserTable(Connection DbConnection) {
-
-        System.out.println("Checking for existing tables.");
-
-        try
-        {
-            // Get a Statement object.
-            Statement statement = DbConnection.createStatement();
-            try
-            {
-                // Print the userlist table.
-                ResultSet resultSet = statement.executeQuery(
-                        "SELECT * FROM Userlist");
-                clientCast("\n------------------------------------------------------------------------"
-                        + "\nPrinting userlist history...\n");
-                System.out.println("\nPrinting userlist table...");
-                while (resultSet.next()) {
-                    clientCast(resultSet.getString("Username"));
-                    //System.out.println(
-                    //        " " + resultSet.getString("Username") );
-                }
-                clientCast("\n------------------------------------------------------------------------");
-                System.out.println("Done printing userlist table.");
-            } catch (SQLException ex)
-            {
-                System.err.println("Exception: " + ex.getMessage());
-                // No need to report an error.
-                // The table simply did not exist.
-            }
-
-        } catch (SQLException ex)
-        {
-            System.out.println("ERROR: " + ex.getMessage());
-            ex.printStackTrace();
-        }
-
-    }
- **/
+    /** viewChatlogTable method queries the derby database for all chat history **/
     public void viewChatlogTable(Connection DbConnection) {
 
         System.out.println("Checking for existing tables.");
-
         try
         {
             // Get a Statement object.
             Statement statement = DbConnection.createStatement();
-
             try
             {
                 // Print the chatlog table.
@@ -634,8 +526,7 @@ public class Server {
                 while (resultSet.next()) {
                     clientCast(resultSet.getString("Message")
                     );
-                    //System.out.println(" " + resultSet.getString("Message")
-                    //);
+
                 }
                 clientCast("\n------------------------------------------------------------------------");
                 System.out.println("Done printing chatlog table.");
@@ -645,7 +536,6 @@ public class Server {
                 // No need to report an error.
                 // The table simply did not exist.
             }
-
         } catch (SQLException ex)
         {
             System.out.println("ERROR: " + ex.getMessage());
